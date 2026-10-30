@@ -3,3 +3,42 @@ title: "Proposal"
 ---
 
 Your proposal go here.
+# Title: UFO (Unidentified Flying Objects) analysis in the United States
+
+
+### Group member names:
+Tala Khodre & Khue Li
+
+### Short description:
+This project aims to understand how UFO sightings are related to some other variables such as location, demographics of the region, age of witnesses, political beliefs, and such.
+
+### Possible Research Questions:
+- Is there a political/religious belief that witnesses of UFO tend to share, and if so, what is it?
+- how do age and gender influence the public belief that UFOs represent extraterrestrial technology versus natural or man-made phenomena?
+- Are UFOs significantly more common in counties with low light pollution, dark sky, and wide terrain compared to dance high canopy or light polluted regions?
+
+### Interest:
+We are interested in this project because neither of us are from the US, and we wonder why it is the US with the most UFO sightings. Khue studies Geography, which comes hand in hand with our analysis of mapping and region/counties natural landscape and properties. Tala studies economics, which would help us understand the median income of people in these counties, and how this would inform their beliefs in UFO or not.
+
+### Data set:
+We are going to use the UFO Sighting CSV file from GitHub. This data includes >80,000 recorded UFO "sightings" around the world, including the UFO shape, lat/long and state/country of where the sighting occurred, duration of the "event" and the data_time when it occurred. Data comes originally from NUFORC.
+
+```{r}
+ufo_sightings <- readr::read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-06-25/ufo_sightings.csv")
+
+head(ufo_sightings)
+```
+Another data set that we have includes UFO sightings with weather conditions and more useful variables.
+Additionally, we also have a data set on literacy rates and political beliefs by region, which would be helpful to combine with our UFO date sets.
+
+# Communication Plan:
+We will use Whats App as our method of communication. We are also Co-RAs, so we meet together weekly regularly. We will utilize our time together to work on the group project in the meantime, dedicating around 2 hours on Tuesdays to get it done.
+
+# Roles:
+We will both work together. If one of us has issues, the other will step in and help to resolve ity. We don't want to have a particularl set-up of milestones, we prefer to work jointly and go from there based on our strengths.
+
+# Conflict Resolution:
+We are both trained on Conflict resultion as part of our RA traiing, so hopefully this is already figured out.
+
+# A rough implementation plan:
+We plan to meet every Tuesday for approximately two hours to work on our project together. During these meetings, we will explore and clean our datasets, discuss our research questions, analyze the data using R, and create visualizations. We will regularly check our progress, share ideas, and help each other with any challenges. As we learn more about our datasets, we will adjust our research questions and methods if needed. Toward the end of the project, we will focus on interpreting our findings and preparing our final presentation together
