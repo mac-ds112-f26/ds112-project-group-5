@@ -1,0 +1,32 @@
+{
+  "appx/proposal.qmd": {
+    "proposal.html": "72fd93d3"
+  },
+  "index.qmd": {
+    "index.html": "04652f3d"
+  },
+  "eda/eda-member1.qmd": {
+    "eda-member1.html": "3cc21719"
+  },
+  "eda/eda-member2.qmd": {
+    "eda-member2.html": "60450cc7"
+  },
+  "eda/eda-member3.qmd": {
+    "eda-member3.html": "847df8ae"
+  },
+  "appx/case-study.qmd": {
+    "case-study.html": "4dda340b"
+  },
+  "wa/wa-member1.qmd": {
+    "wa-member1.html": "e53f2a33"
+  },
+  "wa/wa-member2.qmd": {
+    "wa-member2.html": "8767e1ac"
+  },
+  "wa/wa-member3.qmd": {
+    "wa-member3.html": "4ba6a11f"
+  },
+  "404.qmd": {
+    "404.html": "235e7843"
+  }
+}

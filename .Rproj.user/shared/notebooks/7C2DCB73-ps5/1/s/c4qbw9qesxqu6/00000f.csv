@@ -1,0 +1,7 @@
+"0","library(ggplot2)"
+"0","library(dplyr)"
+"0","library(readr)"
+"0",""
+"0","games <- read_csv(""https://mac-stat.github.io/data/boardgamegeeks.csv"")"
+"0",""
+"0","head(games)"

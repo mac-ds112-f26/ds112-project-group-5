@@ -1,0 +1,3 @@
+"0","# Import the experiment results"
+"0","library(gsheet)"
+"0","results <- gsheet2tbl('https://docs.google.com/spreadsheets/d/11OT1VnLTTJasp5BHSKulgJiCbSLiutv8mKDOfvvXZSo/edit?usp=sharing')"

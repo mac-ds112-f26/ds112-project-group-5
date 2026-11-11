@@ -1,0 +1,4 @@
+"0","# Try running the following FULL chunk A FEW TIMES"
+"0","set.seed(155)"
+"0","fandango |> "
+"0","  sample_n(size = 2, replace = FALSE)"

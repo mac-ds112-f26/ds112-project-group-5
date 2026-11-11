@@ -1,0 +1,8 @@
+"0","ggplot(games, aes(x = factor(kickstarted),"
+"0","                  fill = popular)) +"
+"0","  geom_bar(position = ""fill"")  + scale_y_continuous(labels = scales::percent) +labs("
+"0","    title = ""Game Popularity by Kickstarter Status"","
+"0","    x = ""Kickstarted (0 = No, 1 = Yes)"","
+"0","    y = ""Percentage of Games"","
+"0","    fill = ""Popular"""
+"0","  )"

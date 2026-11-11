@@ -1,0 +1,4 @@
+"0","fandango |> "
+"0","  ggplot(aes(y = userscore_rt, x = criticscore_rt)) +"
+"0","  geom_abline(data = results, aes(intercept = sample_intercept, slope = sample_slope, linetype=section), color = ""gray"") + "
+"0","  geom_smooth(method = ""lm"", color = ""red"", se = FALSE)"
