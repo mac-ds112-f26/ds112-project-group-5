@@ -1,14 +1,15 @@
 ---
-title: "Proposal"
+title: "UFO (Unidentified Flying Objects) analysis in the United States"
 ---
 
 Your proposal go here.
-# Title: UFO (Unidentified Flying Objects) analysis in the United States
+# Title
+UFO (Unidentified Flying Objects) analysis in the United States
 
 
 ### Group member names:
-Tala Khodre & Khue Li
-
+-Tala Khodre 
+-Khue Le
 ### Short description:
 This project aims to understand how UFO sightings are related to some other variables such as location, demographics of the region, age of witnesses, political beliefs, and such.
 
