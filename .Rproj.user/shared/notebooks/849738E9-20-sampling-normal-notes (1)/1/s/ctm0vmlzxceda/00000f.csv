@@ -1,3 +1,0 @@
-"0","# Try running the following chunk A FEW TIMES"
-"0","fandango |> "
-"0","  sample_n(size = 2, replace = FALSE)"

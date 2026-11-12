@@ -1,5 +1,0 @@
-"0","# Plot the relationship of UserScore with CriticScore among your sample"
-"0","my_sample |> "
-"0","  ggplot(aes(y = userscore_rt, x = criticscore_rt)) +"
-"0","  geom_point() + "
-"0","  geom_smooth(method = ""lm"", se = FALSE)"

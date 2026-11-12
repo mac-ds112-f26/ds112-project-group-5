@@ -1,6 +1,0 @@
-"0",""
-"0","# Driver B"
-"0","shaded_normal(mean = 30, sd = 3) + "
-"0","  geom_vline(xintercept = 36) + "
-"0","  lims(x = c(18, 75), y = c(0, 0.15)) + "
-"0","  labs(title = ""Driver B"")"

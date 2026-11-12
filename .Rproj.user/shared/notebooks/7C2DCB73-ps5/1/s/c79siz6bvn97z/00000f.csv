@@ -1,2 +1,0 @@
-"0","games <- games |> "
-"0","  mutate(popular = (mean_rating > 8) & (p25_rating > 6.5))"
