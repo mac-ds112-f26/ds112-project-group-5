@@ -2,4 +2,13 @@
 title: "Case Study"
 ---
 
-Your case study go here.
+Our case study was on the Article: *The physical traits that define men & women in literature*
+
+It was easy to follow because it was in a story telling style where the author took us with them step by step in their thought process from their observation, data collection, all the way to their conclusion. 
+They included the size of their data set (2000 books). Along the way, to prove the point that many books use stereotypical language in describing women's and men's bodies, they had a check point where they ask the reader for engagement, which makes the experience of reading the article more interactive. 
+
+They used a bubble visualization to show how often a word repeats, and a colour factor to show whether it refers to a man or a woman. So we have a categorical variable (Gender) and a numerical one (count of the description used).
+
+I was also particularly fond of the chart that kepe tracks of how often it is to find a description of a specific body part for men and women, and what that description is. It is visually easy to follow and is accessible to everyone, and it definitely makes the point come across. 
+
+Towards the end, the author showed us how she collected the data, manipulated it, and did the visualization. This part is typically for more experienced readers who would like to understand the logistics behind the visualization. I found it very helpful because it doesn't only explain how she did it, but also the motives behind choosing the specific graph.
