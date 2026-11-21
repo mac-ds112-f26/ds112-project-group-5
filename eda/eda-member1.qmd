@@ -1,5 +1,197 @@
 ---
-title: "Member 1 First Name & Last Name Initial"
+title: "KL"
 ---
 
 Your exploratory data analysis of the team datasets go here.
+
+ Exploring UFO Sightings in the United States
+
+## Introduction
+
+For this exploratory data analysis, I am using
+a dataset of reported UFO sightings from
+TidyTuesday. I want to explore where UFO
+sightings are reported most frequently, what
+shapes people report seeing, and how long
+these encounters typically last.
+
+## 1. Loading the Data
+
+```{r}
+library(readr)
+library(dplyr)
+library(ggplot2)
+
+ufo_sightings <- read_csv(
+  "https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-06-25/ufo_sightings.csv"
+)
+
+head(ufo_sightings)
+```
+
+## 2. Understanding the Dataset
+
+```{r}
+dim(ufo_sightings)
+names(ufo_sightings)
+summary(ufo_sightings)
+```
+
+These functions help me understand the size
+of the dataset, the available variables,
+and their general characteristics.
+
+## 3. Most Common UFO Shapes
+
+```{r}
+ufo_sightings %>%
+  count(ufo_shape, sort = TRUE) %>%
+  head(10)
+```
+
+```{r}
+ufo_sightings %>%
+  filter(!is.na(ufo_shape)) %>%
+  count(ufo_shape, sort = TRUE) %>%
+  head(10) %>%
+  ggplot(aes(x = reorder(ufo_shape, n), y = n)) +
+  geom_col(fill = "steelblue") +
+  coord_flip() +
+  labs(
+    title = "10 Most Commonly Reported UFO Shapes",
+    x = "UFO Shape",
+    y = "Number of Reports"
+  )
+```
+
+### Interpretation
+
+The bar chart shows that "light" is by far the most frequently reported UFO shape, with approximately 16,500 sightings. Triangle and circle are the next most common shapes, each with around 7,500–8,000 reports. In contrast, formation and oval shapes appear less frequently.
+
+One interesting observation is that many reports involve lights rather than clearly defined physical shapes. This could suggest that people often observe distant or unclear objects rather than objects with recognizable outlines.
+
+## 4. UFO Sightings by State
+
+First, I will focus on reported sightings
+from the United States.
+
+```{r}
+us_ufo <- ufo_sightings %>%
+  filter(country == "us", !is.na(state))
+```
+
+```{r}
+us_ufo %>%
+  count(state, sort = TRUE) %>%
+  head(10)
+```
+
+```{r}
+us_ufo %>%
+  count(state, sort = TRUE) %>%
+  head(10) %>%
+  ggplot(aes(x = reorder(state, n), y = n)) +
+  geom_col(fill = "darkgreen") +
+  coord_flip() +
+  labs(
+    title = "Top 10 States with UFO Reports",
+    x = "State",
+    y = "Number of Reports"
+  )
+```
+
+### Interpretation
+The bar chart shows that California has the highest number of reported UFO sightings, with approximately 9,000 reports, nearly twice as many as Washington and Florida. Other states with relatively high numbers of reports include Texas and New York.
+
+One interesting observation is that the highest numbers of sightings are not limited to the most populated states. For example, Washington reports slightly more sightings than Florida and Texas, despite having a smaller population. This suggests that factors beyond population size, such as geographic location, outdoor activities, or reporting behavior, might influence the number of UFO reports.
+
+However, because this graph shows total reports rather than reports per capita, we cannot conclude that UFO sightings are more common for an individual living in one state than another.
+
+
+## 5. How Long Do UFO Encounters Last?
+
+```{r}
+summary(us_ufo$encounter_length)
+```
+
+```{r}
+us_ufo %>%
+  filter(
+    !is.na(encounter_length),
+    encounter_length > 0,
+    encounter_length <= 600
+  ) %>%
+  ggplot(aes(x = encounter_length)) +
+  geom_histogram(
+    bins = 30,
+    fill = "orange",
+    color = "white"
+  ) +
+  labs(
+    title = "Duration of Reported UFO Encounters",
+    x = "Duration (seconds)",
+    y = "Number of Reports"
+  )
+```
+
+This graph focuses on encounters lasting
+10 minutes or less so shorter encounters
+are easier to visualize.
+
+### Interpretation
+The histogram shows that many reported UFO encounters last for relatively short periods. There are noticeable peaks at rounded durations, such as 60, 120, 300, and 600 seconds. This suggests that witnesses may estimate the duration of sightings rather than record exact measurements.
+
+The distribution is also uneven, with many observations concentrated at shorter durations. Because the graph only includes encounters lasting 600 seconds or less, it does not show the full range of durations in the dataset.
+
+#6. How long is a typical reported encounter for each UFO shape?
+
+```{r}
+
+shape_duration <- us_ufo %>%
+  filter(
+    !is.na(ufo_shape),
+    !is.na(encounter_length),
+    encounter_length > 0
+  ) %>%
+  group_by(ufo_shape) %>%
+  summarize(
+    reports = n(),
+    median_minutes = median(encounter_length) / 60,
+    .groups = "drop"
+  ) %>%
+  filter(reports >= 100) %>%
+  arrange(desc(reports)) %>%
+  head(10)
+
+shape_duration
+
+```
+```{r}
+
+ggplot(shape_duration,
+       aes(x = reorder(ufo_shape, median_minutes),
+           y = median_minutes)) +
+  geom_col(fill = "purple") +
+  coord_flip() +
+  labs(
+    title = "Typical UFO Encounter Duration by Shape",
+    x = "UFO Shape",
+    y = "Median Duration (Minutes)"
+  ) +
+  theme_minimal()
+
+```
+# Interpretation
+
+
+
+The bar chart shows that most reported UFO shapes have a similar median encounter duration of approximately 3 minutes. However, disk-shaped UFOs have the longest median duration at 4 minutes, while fireballs have the shortest at 2 minutes.
+
+Interestingly, although lights are the most frequently reported UFO shape, they do not have the longest encounter duration. This suggests that the frequency of a reported shape does not necessarily correspond to how long the encounter lasts. Overall, the differences in median duration are relatively small, although certain shapes appear to be associated with slightly longer sightings.
+
+
+### Conclusion
+
+The results show that California has the highest number of reported UFO sightings, while lights are the most commonly reported UFO shape. Most encounters are relatively short, although reported durations vary. When comparing UFO shapes, most categories have a median duration of approximately 3 minutes, while disk-shaped UFOs tend to have slightly longer encounters and fireballs have shorter ones.
+
+Overall, these findings suggest that reported UFO sightings vary by location and shape, but differences in encounter duration between shapes are relatively modest. However, because these sightings are self-reported, factors such as population size, observation conditions, and differences in how witnesses describe their experiences may influence the results. Further research could explore whether population density, light pollution, or geographic characteristics help explain these patterns.
