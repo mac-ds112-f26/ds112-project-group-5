@@ -1,5 +1,94 @@
 ---
-title: "Member 2 First Name & Last Name Initial"
+title: "T.K."
 ---
 
-Your exploratory data analysis of the team datasets go here.
+First, I will upload the data:
+
+```{r}
+ufo_sightings <- readr::read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-06-25/ufo_sightings.csv")
+
+head(ufo_sightings)
+```
+
+Then, I will do some analysis similar to TidyTuesday to understand the data a little more. 
+
+```{r}
+library(tidyverse)
+library(lubridate)
+
+ufo <- ufo_sightings |>
+  mutate(
+    date_time       = mdy_hm(date_time),
+    date_documented = mdy(date_documented),
+    year            = year(date_time),
+    month           = month(date_time, label = TRUE),
+    hour            = hour(date_time),
+    report_lag_days = as.numeric(date_documented - as_date(date_time))
+  )
+
+```
+> This chode chunck is good to read the dates as dates and not as text
+
+```{r}
+# To study the shape of the UFO
+ufo |> count(country, sort = TRUE)
+ufo |> count(ufo_shape, sort = TRUE) |> print(n = 30)
+ufo |> count(state, sort = TRUE) |> head(15)
+
+ufo |>
+  count(ufo_shape) |>
+  filter(!is.na(ufo_shape)) |>
+  ggplot(aes(n, fct_reorder(ufo_shape, n))) +
+  geom_col() +
+  labs(x = "Sightings", y = NULL, title = "Reported UFO shapes")
+```
+> It's interesting to see that the most common shape is light, which technically is not a shape yet is the most popular. This is consistent with the idea that it might be an alien presence and it's got light. It's intersrting to see that there's a 'ciagr' shape UFO and it's been repostd quite a but too. 
+
+```{r}
+# To study when the uFOs happen most often:
+
+# Over the years
+ufo |>
+  filter(year >= 1990) |>
+  count(year) |>
+  ggplot(aes(year, n)) +
+  geom_line() +
+  labs(title = "Sightings per year", y = "Sightings")
+
+# By month and hour
+ufo |> filter(!is.na(month)) |> count(month) |>
+  ggplot(aes(month, n)) + geom_col()
+
+ufo |> filter(!is.na(hour)) |> count(hour) |>
+  ggplot(aes(hour, n)) + geom_col()
+```
+> Up untill the year 2013 there was an overall uoward trending pattern where UFO sightings has increased. The peak as it looks like in this graph was 2013. Between 2013 and 2015, we notice a sharp decrease in UFO sightings. When it comes to sightings according to the months, we see an overall higher UFO sightings rate in summer compared to winter and this might be due the fact that more people would go outside when it's good and warm weather as opposed to cold. Quite intuitively, we see that UFO sightings are more common at night. This is also consistent with the fact that the most popular shape reported for UFO sightings is also light and it makes sense that we see the light much brighter during the night, which is when the UFO sightings are by far the most frequent.
+
+```{r}
+# To study the length of the encounter with the UFO
+ufo |>
+  filter(encounter_length > 0) |>
+  ggplot(aes(encounter_length)) +
+  geom_histogram(bins = 50) +
+  scale_x_log10(labels = scales::comma) +
+  labs(x = "Encounter length (seconds, log scale)")
+```
+> The scale is in log because seconds is too small and hard to visualize with this many observations. 
+
+```{r}
+#When do the sightings happen, and what is the usual report time gap?
+
+ufo |>
+  filter(country == "us", !is.na(latitude), longitude > -130, longitude < -65, latitude > 24, latitude < 50) |>
+  ggplot(aes(longitude, latitude)) +
+  geom_point(alpha = 0.05, size = 0.3) +
+  coord_quickmap() +
+  labs(title = "US sightings")
+
+ufo |>
+  filter(report_lag_days >= 0) |>
+  ggplot(aes(report_lag_days)) +
+  geom_histogram(bins = 50) +
+  scale_x_log10(labels = scales::comma)
+```
+
